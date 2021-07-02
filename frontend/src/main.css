@@ -1,0 +1,32 @@
+.myDiv{
+    margin: 50px;
+}
+.icons{
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.edit > div{
+    margin-bottom: 10px;
+}
+.edit > div > input[type=text], .edit > div >select{
+    width: 600px;
+}
+
+@media screen and (max-width:1024px) {
+    i{
+        font-size: 10px;
+    }
+}
+
+#size{
+    width: 120px;
+}
+
+#myInput{
+    margin-right: 13px;
+    width: 200px;
+}
+.myBtn{
+    height: 40px;
+}

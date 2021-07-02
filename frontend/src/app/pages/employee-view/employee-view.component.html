@@ -1,0 +1,65 @@
+<div class="myDiv">
+    <h3 class="text-center">Employee Details</h3>
+    <div class="d-flex">
+        <input #name class="form-control mb-2" id="myInput" type="text" placeholder="Search Name" autocomplete="off">
+        <button class="btn btn-primary myBtn" (click)="searchbtn(name.value)">Search</button>
+    </div>
+    <div class="form-group mb-3">
+        <label for="size">No. of Rows</label><br>
+        <select #size name="size" id="size" (click)="updatesize(size.value)">
+            <option value="5" >5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+        </select>
+    </div>
+    <table id="myTable" class="table table-bordered table-hover border-secondary display text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Salary</th>
+                <th>Team</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="myTableBody">
+            <!-- <div *ngIf="employees?.length; else #empty"></div> -->
+
+            <tr *ngFor="let list of employees">
+
+                <td>{{list._id}}</td>
+                <td *ngIf='list.name?.length; else elseBlock'>{{list.name}}</td>
+                <td *ngIf='list.gender.length>1 else elseBlock'>{{list.gender}}</td>
+                <td *ngIf='list.name?.length; else elseBlock'>{{list.salary}}</td>
+                <td *ngIf='list.name?.length; else elseBlock'>{{list.team}}</td>
+                <td *ngIf='list.address?.length; else elseBlock'>{{list.address}}</td>
+
+                <td>
+                    <i class="fa fa-pencil-square-o icons" style="color: blue;padding-right: 20px;"
+                        [routerLink]="['/employees',list._id]"></i>
+                    <i class="fa fa-trash-o icons" style="color: red;" (click)="deleteEmployee(list)"></i>
+                </td>
+            </tr>
+            <!-- <div #empty>Please add details</div> -->
+
+        </tbody>
+    </table>
+    <ng-template #elseBlock>
+        <td>-</td>
+    </ng-template>
+    <div *ngIf='!employees.length;'>
+        <h3 class="text-center">please add details</h3>
+    </div>
+    <div *ngIf='employees.length;'>
+        <ul class="pagination justify-content-end">
+            <button class="btn btn-secondary mx-3" (click)="updatepage(size.value,-1)">Prev</button>
+            <button class="btn btn-secondary" (click)="updatepage(size.value,1)">Next</button>
+        </ul>
+    </div>
+    <button class="btn btn-success mb-3" routerLink="/newemployee">Add Employee</button>
+</div>
